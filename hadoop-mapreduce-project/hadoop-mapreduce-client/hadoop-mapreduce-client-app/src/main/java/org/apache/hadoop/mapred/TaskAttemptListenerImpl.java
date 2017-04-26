@@ -125,12 +125,12 @@ public class TaskAttemptListenerImpl extends CompositeService
       server = 
           new RPC.Builder(conf).setProtocol(TaskUmbilicalProtocol.class)
             .setInstance(this).setBindAddress("0.0.0.0")
-            .setPort(0).setNumHandlers(
+                .setPortRangeConfig("56000-56009").setNumHandlers(
                 conf.getInt(MRJobConfig.MR_AM_TASK_LISTENER_THREAD_COUNT, 
                     MRJobConfig.DEFAULT_MR_AM_TASK_LISTENER_THREAD_COUNT))
                     .setVerbose(false).setSecretManager(jobTokenSecretManager)
                     .build();
-      
+      LOG.info("setProtRangeConfig: 56000-56009");
       // Enable service authorization?
       if (conf.getBoolean(
           CommonConfigurationKeysPublic.HADOOP_SECURITY_AUTHORIZATION, 
